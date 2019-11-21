@@ -13,6 +13,8 @@ class TabControlModel extends DOMModel {
     constructor(element) {
         super(element);
         this.getDataAttribute('title');
+        this.getDataAttribute('subTitle');
+        this.getDataAttribute('handler');
         this.getDataAttribute('model');
         this.getChildComponent('h2', SubTitleModel);
         this.getChildComponentArray('tab-item', TabItemModel);

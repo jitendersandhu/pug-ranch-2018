@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.Resource;
+import org.apache.sling.api.resource.ValueMap;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.models.annotations.Exporter;
 import org.apache.sling.models.annotations.Model;
@@ -43,15 +44,18 @@ public class TabControl {
         return request.getParameter("sort");
     }
 
-    public List<Page> getChildren() {
-        List<Page> children = new ArrayList<Page>();
-        PageManager pageManager = resolver.adaptTo(PageManager.class);
-        if (pageManager != null) {
-            Page currentPage = pageManager.getContainingPage(resource);
-            Iterator<Page> childPages = currentPage.listChildren();
-            childPages.forEachRemaining(children::add);
-            if ("ZA".equals(getSort())) {
-                Collections.reverse(children);
+    public List<String> getChildren() {
+
+        List<String> children = new ArrayList<String>();
+
+        ValueMap properties = resource.adaptTo(ValueMap.class);
+        if (properties.containsKey("tabItems")) {
+            String[] arr = properties.get("tabItems", new String[0]);
+
+            if (arr != null && arr.length > 0) {
+                for (int i = 0; i < arr.length; i++) {
+                    children.add(arr[i]);
+                }
             }
             return children;
         }

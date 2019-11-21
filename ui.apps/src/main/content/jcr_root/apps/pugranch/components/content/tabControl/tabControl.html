@@ -1,11 +1,11 @@
 <tab-control data-sly-use.model="org.millr.core.models.TabControl"
     data-sort-by="${model.sortBy}"
     data-model="${'{0}.model.json' @ format = resource.path}"
-    data-title="${model.title || 'testing 123'}">
-    <h2>${properties.subTitle || 'Sub Title'}</h2>
+    data-title="${model.title || 'testing 123'}"
+    data-sub-title="${properties.subTitle}">
+    <h2>${properties.title || 'Title'}</h2>
+    <h3 className="test-sub-title">${properties.subTitle || 'Sub Title'}</h3>
     <sly data-sly-repeat.child="${model.children}">
-        <tab-item>${child.title}</tab-item>
+        <tab-item>${child}</tab-item>
     </sly>
 </tab-control>
-
-

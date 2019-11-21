@@ -33,7 +33,7 @@ export default class TabControl extends React.Component {
         this.getData()
             .then((data) => {
                 this.state.tabItems = [];
-                data.children.forEach(child => this.state.tabItems.push(child.title));
+                data.children.forEach(child => this.state.tabItems.push(child));
                 this.setState({
                     tabItems: this.state.tabItems,
                 });
@@ -44,8 +44,8 @@ export default class TabControl extends React.Component {
         return (
             <React.Fragment>
                 <h2>{this.props.title}</h2>
-                <h3 className="test-sub-title">{this.props.h2.props.text}</h3>
-                <button onClick={this.handleClick}>A-Z</button>
+                <h3 className="test-sub-title">{this.props.subTitle}</h3>
+                <button className="test-button" onClick={this.handleClick}>A-Z</button>
                 {this.state.tabItems.map(tabItem =>
                     <TabItem key={tabItem} text={tabItem} />)}
             </React.Fragment>
